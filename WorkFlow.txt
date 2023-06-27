@@ -1,0 +1,30 @@
+Website:
+
+>Interviewee will login using their Gmail account (or any other specified account).
+>Interviewee will enter general details such as name, father's name, age, education, etc.
+>Key fields that the chatbot will use to question the interviewee:
+	- Job title
+	- Technical skills
+	- Problem-solving skills
+	- Experience
+
+ChatBot:
+I must pass the interviewee skills to the model as question(prompt) [Generate some questions realted to {pandas}]--> The answer is the thing i must show 
+the interviewee (the model's answer will become the question to the interviewee) when interviewee answers (the interviewee's answer will become the question to the 
+model)
+
+
+> Prompt: Hello!! How are you {name}.
+	Interviewee: I am fine (or any other answer).
+> Promt: You have applied for {field_name}. Am i correct?
+	Interviewee: Yes i have applied for field_name(or any other related response)
+> Prompt: 
+	Interviewee: 
+> Prompt:
+	Interviewee: 
+> Prompt:
+	Interviewee: 
+> Prompt:
+	Interviewee: 
+> Prompt:
+	Interviewee: 
