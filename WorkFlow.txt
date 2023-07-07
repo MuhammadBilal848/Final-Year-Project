@@ -11,7 +11,7 @@ Website:
 ChatBot:
 I must pass the interviewee skills to the model as question(prompt) [Generate some questions realted to {pandas}]--> The answer is the thing i must show 
 the interviewee (the model's answer will become the question to the interviewee) when interviewee answers (the interviewee's answer will become the question to the 
-model)
+model) 
 
 
 > Prompt: Hello!! How are you {name}.
