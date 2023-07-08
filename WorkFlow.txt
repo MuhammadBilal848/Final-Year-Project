@@ -28,3 +28,20 @@ model)
 	Interviewee: 
 > Prompt:
 	Interviewee: 
+
+
+
+
+#######################################################################################################################
+
+We can also do it this way:
+
+1. Create a module 'Questions Generator' that accepts user's skills,years of experience and job role that he entered into the website.
+
+2. Take skills,years of experience and job role and 'Questions Generator' will generate questions based on these 
+fields and dumps the questions into text file.
+
+3. Now we create main module that displays those questions one by one by reading questions text file and asks user questions and
+takes answer and checks if the given answer is correct wrt to the given qs and return the percentage that model thinks 
+
+#######################################################################################################################

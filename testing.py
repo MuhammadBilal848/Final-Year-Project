@@ -23,10 +23,12 @@ first_question = PromptTemplate(
 # tempratture param controls how balance the reponse should be
 question = LLMChain(llm=llm , prompt=first_question,verbose=True) 
 
-qs = question.run('Artificial Neural Network')
+sk = ['ANN','Dockers','Scikit-learn','Sequence Models']
+
+input_text_qs = st.text_input('Write your answer here')
+
+qs = question.run(input_text_qs)
 # qs = qs.strip().split('\n')
-
-
 
 first_answer = PromptTemplate(
     input_variables = ['skill_ans'] ,
@@ -35,11 +37,19 @@ first_answer = PromptTemplate(
 answer = LLMChain(llm=llm , prompt=first_answer,verbose=True) 
 
 
-st.write(qs)
-input_text = st.text_input('Write your answer here')
+qs_1 = ConversationBufferMemory(input_key='skill_qs',memory_key='chat_history')
 
-if input_text:
-    st.write(answer.run(input_text))
+# st.write(qs)
+# input_text = st.text_input('Write your answer here')
+
+# if input_text:
+#     st.write(answer.run(input_text))
+
+if input_text_qs:
+    # with st.expander('Question'):
+        st.write(qs_1.buffer)
+
+# print(qs_1)
 
 # for a in qs:
 #     print(a)
