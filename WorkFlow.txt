@@ -42,6 +42,8 @@ We can also do it this way:
 fields and dumps the questions into text file.
 
 3. Now we create main module that displays those questions one by one by reading questions text file and asks user questions and
-takes answer and checks if the given answer is correct wrt to the given qs and return the percentage that model thinks 
+takes answer and checks if the given answer is correct wrt to the given qs and return the percentage of correctness of the answer.
+
+4. 
 
 #######################################################################################################################
