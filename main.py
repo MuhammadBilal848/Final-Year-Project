@@ -32,6 +32,6 @@ if input_text:
 qs = chain.run(input_text)
 print(qs)
 
-# 
+# add a gui for user to interact with
 
 # add a validation system that checks the answers
