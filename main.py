@@ -21,7 +21,6 @@ first_prompt = PromptTemplate(
     template = 'Generate 3 questions about {skill_name} skill' 
                              )
 
-# OPENAI LLMS
 # tempratture param controls how balance the reponse should be
 llm = OpenAI(temperature=0.8)
 chain = LLMChain(llm=llm , prompt=first_prompt,verbose=True) 
@@ -33,5 +32,6 @@ if input_text:
 qs = chain.run(input_text)
 print(qs)
 
+# 
 
 # add a validation system that checks the answers
