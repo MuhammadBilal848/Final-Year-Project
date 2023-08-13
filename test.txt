@@ -1,0 +1,17 @@
+
+
+1. How would you design a vector database system to support concurrent read and write operations?
+2. How do you design an algorithm to efficiently query a vector database based on multiple criteria?
+
+1. How can a Sequence Model be used to solve complex sequence-based problems such as natural language processing?
+
+2. How can a Sequence Model be used to identify dependencies between words and improve the accuracy of prediction tasks?
+
+1. How would you implement automated end-to-end testing for a Docker containerized application?
+2. How would you ensure secure communication between two Docker services running on different hosts?
+
+1. How can you use a method in pandas to efficiently group and filter data based on specific criteria?
+2. What is the best way to handle missing data when using pandas to manipulate large datasets?
+
+1. How can you use the TensorFlow Estimator API to create custom estimators?
+2. How can you use TensorFlow's Layer API to build a model with a specific cost function?
