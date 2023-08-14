@@ -1,24 +1,59 @@
+import os
+from langchain.llms import OpenAI
 import streamlit as st
+from langchain import PromptTemplate
+from langchain.chains import LLMChain
 import time
 import pyttsx3 as sp
+from constant import openai_key
+os.environ['OPENAI_API_KEY'] = openai_key
 
 
 tts = sp.init()
+tts.setProperty('rate', 150)
+voices = tts.getProperty('voices')
+tts.setProperty('voice', voices[0].id) # 0 for male and 1 for female
 
 with open('questions.txt', 'r') as file:
     file_contents = file.readlines()
 
+llm = OpenAI(temperature=0.8)
+
+
+first_ans = PromptTemplate(
+    input_variables = ['qs','ans'] ,
+    template='Given the question "\{qs}"\, how accurate do you believe this answer "\{ans}"\ is on a percentage scale?')
+
+
+correct_per = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
+
 cleaned_contents = [line[3:].rstrip('\n') for line in file_contents if line != '\n']
 
-st.title("Question Display")
+for content in cleaned_contents:
+    # print(content)
+    print(content)
+    tts.say(content)
+    tts.runAndWait()
+    answer = input('Type you answer here: ')
+    print(answer)
+    response = correct_per.run(qs=content , ans = answer)
+    print('------------------------------------->',response)
 
-with st.empty():
-    for content in cleaned_contents:
-        # with st.empty():
-        tts.say(content)
-        st.write(content)
-        time.sleep(10)
+# st.title("Question Display")
 
+# with st.empty():
+#     for index,content in enumerate(cleaned_contents):
+#         print('Question ----------------------------------------->',content)
+#         tts.say(content)
+#         tts.runAndWait()
+#         st.write(content)
+#         answer = st.text_area(f'Answer{index}')
+#         print('Answer ----------------------------------------->',answer)
+#         time.sleep(20)
+
+
+
+###############################################
 
 # import os
 # from langchain.llms import OpenAI
