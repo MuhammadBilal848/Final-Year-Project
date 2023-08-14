@@ -1,5 +1,5 @@
 import os
-from constants import openai_key
+from constant import openai_key
 from langchain.llms import OpenAI
 import streamlit as st
 from langchain import PromptTemplate
