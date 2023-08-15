@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Information</title>
+    <script>
+        function addSkillField() {
+            var container = document.getElementById("skillContainer");
+            var newSkillField = document.createElement("div");
+            newSkillField.innerHTML = `
+                <label for="skill">Skill and Experience:</label>
+                <input type="text" name="skill[]" placeholder="e.g., Programming (5 years)" required><br><br>
+            `;
+            container.appendChild(newSkillField);
+        }
+    </script>
+</head>
+<body>
+    <h1>Personal Information</h1>
+    <form action="/submit" method="post">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" required><br><br>
+        
+        <label for="fatherName">Father's Name:</label>
+        <input type="text" name="fatherName" required><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" name="age" required><br><br>
+        
+        <label for="university">University:</label>
+        <input type="text" name="university" required><br><br>
+        
+        <label for="priorExperience">Prior Experience (in years):</label>
+        <input type="number" name="priorExperience" required><br><br>
+        
+        <div id="skillContainer">
+            <label for="skill">Skill and Experience:</label>
+            <input type="text" name="skill[]" placeholder="e.g., Programming (5 years)" required><br><br>
+        </div>
+        
+        <button type="button" onclick="addSkillField()">Add Skill</button>
+        <br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
