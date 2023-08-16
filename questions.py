@@ -15,8 +15,22 @@ first_question = PromptTemplate(
 # tempratture param controls how balance the reponse should be
 question = LLMChain(llm=llm , prompt=first_question,verbose=True) 
 
-sk_exp = [('Vector Databases',5),('Sequence Models',2),('Dockers',5),('pandas',1),('tensorflow',3)]
-for skill,experience in sk_exp:
+
+def gpt_qs(skill,experience):
     response = question.run(skill_qs=skill, experience=experience)
-    with open('test.txt', 'a') as file:
+    with open('questions.txt', 'a') as file:
         file.write(response)
+
+
+
+
+
+
+
+
+
+# sk_exp = [('Vector Databases',5),('Sequence Models',2),('Dockers',5),('pandas',1),('tensorflow',3)]
+# for skill,experience in sk_exp:
+#     response = question.run(skill_qs=skill, experience=experience)
+#     with open('test.txt', 'a') as file:
+#         file.write(response)

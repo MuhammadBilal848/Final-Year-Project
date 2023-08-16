@@ -10,14 +10,43 @@ with open('questions.txt', 'r') as file:
 
 cleaned_contents = [line[3:].rstrip('\n') for line in file_contents if line != '\n']
 
+ans = []
 st.title("Question Display")
 
+print('CHECKINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
+
 with st.empty():
-    for content in cleaned_contents:
+    for index,content in enumerate(cleaned_contents):
         # with st.empty():
-        tts.say(content)
         st.write(content)
+        tts.say(content)
+        tts.runAndWait()
+        answer = st.text_area(f'Answer {index}')
+        ans.append(answer)
         time.sleep(10)
+
+
+print('ANSWER LIST ------------------------------------->', ans)
+# import streamlit as st
+# import time
+# import pyttsx3 as sp
+
+
+# tts = sp.init()
+
+# with open('questions.txt', 'r') as file:
+#     file_contents = file.readlines()
+
+# cleaned_contents = [line[3:].rstrip('\n') for line in file_contents if line != '\n']
+
+# st.title("Question Display")
+
+# with st.empty():
+#     for content in cleaned_contents:
+#         # with st.empty():
+#         tts.say(content)
+#         st.write(content)
+#         time.sleep(10)
 
 
 # import os
