@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Result</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementById("message").innerText = "Thanks for filling the form, Now wait for the questions to be generated!!";
+            }, 20000); // 20000 milliseconds = 20 seconds
+        });
+    </script>
 </head>
 
 <body>
-
-    <!-- <h1>Here is the information you entered in the interview: {{ result }}</h1> -->
-    <h1>Thanks for flilling the form, Now wait for the questions to be generated!!</h1>
-
+    <h1 id="message">Please wait...</h1>
 </body>
 
 </html>

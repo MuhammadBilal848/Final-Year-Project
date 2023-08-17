@@ -1,18 +1,5 @@
 
-1. How would you approach setting up a React application from scratch to ensure it is optimized for performance and is scalable?
 
-2. How would you implement unit testing for React components and ensure that all edge cases and potential bugs are covered?
+1. How does Node.js handle asynchronous requests and what are the potential pitfalls when working with asynchronous requests?
 
-1. How can you use OpenCV to implement object detection and recognition technology for a real-time video streaming application?
-
-2. What techniques have you used with OpenCV to optimize memory usage and improve image processing performance?
-
-1. How does one go about efficiently querying and manipulating large datasets with pandas?
-2. What are the best practices for dealing with missing data when working with pandas DataFrames?
-
-1. How can you use TensorFlow to optimize a model for maximum performance on a particular dataset?
-2. How can you utilize TensorFlow's low-level APIs to build custom, non-standard neural network architectures?
-
-1. How to efficiently use blueprints to structure a Flask application containing multiple modules?
-
-2. How can we effectively use caching on Flask applications to improve performance?
+2. How would you approach debugging a complex Node.js application that is experiencing performance issues?

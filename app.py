@@ -2,6 +2,8 @@ from flask import Flask , redirect , url_for , render_template,request,jsonify
 import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , get_answer , clear_text_file
+import time
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -16,25 +18,25 @@ def questions(output):
         skill , experience = i.split(',')
         gpt_qs(skill,experience)
 
-    template_content = render_template('page 1.html',result = output)
+    # template_content = render_template('page 1.html',result = output)
+    # time.sleep(20)
 
     # final_content = f"{template_content}<script>setTimeout(function() {{ window.location.href = '{'/interview'}'; }}, {1 * 10});</script>"
-    final_content = f"{template_content}<script>window.location.href = '{'/interview'}';</script>"
-
-    return final_content
+    # final_content = f"{template_content}<script>window.location.href = '{'/interview'}';</script>"
+    print('REDIRECTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
+    return redirect(url_for('interview'))
 
 @app.route('/interview/')
 def interview():
     question_list = generated_qs()
 
-    question_data = []
-    for q in question_list:
-        spoken_question = speak_qs(q)
-        question_data.append({'question': q, 'spoken_question': spoken_question})
+    # question_data = []
+    # for q in question_list:
+    #     spoken_question = speak_qs(q)
+    #     question_data.append({'question': q, 'spoken_question': spoken_question})
+        
     
-    return render_template('interview.html', question_data=question_data)
-
-
+    return render_template('interview.html', question_list=question_list)
 
 
 @app.route('/submit',methods = ['POST','GET'])

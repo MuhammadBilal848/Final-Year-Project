@@ -21,7 +21,7 @@ os.environ['OPENAI_API_KEY'] = openai_key
 
 
 def generated_qs():
-    ''' Returns questions in form of a python list '''
+    ''' Returns already written questions in form of a python list '''
     global cleaned_contents
     with open('questions.txt', 'r') as file:
         file_contents = file.readlines()
