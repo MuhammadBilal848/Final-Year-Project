@@ -17,8 +17,9 @@ def questions(output):
     for i in s_e:
         skill , experience = i.split(',')
         gpt_qs(skill,experience)
-    print('REDIRECTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
     return redirect(url_for('interview'))
+
+
 
 @app.route('/interview/',methods = ['POST','GET'])
 def interview():
@@ -36,7 +37,10 @@ def submit_answer():
         print('Answer ---------------->', user_answer)
         
         # Process the data as needed
-        
+        response = get_answer(question,user_answer)
+        print('first question')
+        print(response)
+        print('first response')
         response_data = {"message": "Answer received successfully"}
         return jsonify(response_data)  # Return a JSON response
     else:
@@ -62,9 +66,11 @@ def submit():
             "prior_experience": prior_experience,
             "skill & experience": skills
         }
+        print('BEOFRE JSON',response_data)
         response_data = json.dumps(response_data)
+        print('AFTER JSON',response_data)
+
     return redirect(url_for('questions',output = response_data))
 
 if __name__ == '__main__':
     app.run(debug=True)
-

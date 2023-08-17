@@ -39,6 +39,7 @@ def speak_qs(content):
     tts.runAndWait()
 
 def get_answer(content,answer):
+    ''' Accepts question and answer as parameters and returns whether answer is correct or not wrt to the question '''
     llm = OpenAI(temperature=0.8)
 
     first_ans = PromptTemplate(
