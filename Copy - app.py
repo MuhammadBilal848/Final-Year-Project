@@ -17,31 +17,26 @@ def questions(output):
     for i in s_e:
         skill , experience = i.split(',')
         gpt_qs(skill,experience)
+
+    # template_content = render_template('page 1.html',result = output)
+    # time.sleep(20)
+
+    # final_content = f"{template_content}<script>setTimeout(function() {{ window.location.href = '{'/interview'}'; }}, {1 * 10});</script>"
+    # final_content = f"{template_content}<script>window.location.href = '{'/interview'}';</script>"
     print('REDIRECTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
     return redirect(url_for('interview'))
 
-@app.route('/interview/',methods = ['POST','GET'])
+@app.route('/interview/')
 def interview():
     question_list = generated_qs()
 
+    # question_data = []
+    # for q in question_list:
+    #     spoken_question = speak_qs(q)
+    #     question_data.append({'question': q, 'spoken_question': spoken_question})
+        
+    
     return render_template('interview.html', question_list=question_list)
-
-@app.route('/submit_answer', methods=['POST'])
-def submit_answer():
-    if request.method == 'POST':
-        data = request.json
-        question = data.get('question')
-        user_answer = data.get('userAnswer')
-        print('Question ------------->', question)
-        print('Answer ---------------->', user_answer)
-        
-        # Process the data as needed
-        
-        response_data = {"message": "Answer received successfully"}
-        return jsonify(response_data)  # Return a JSON response
-    else:
-        return '', 204  # Return a No Content response
-
 
 
 @app.route('/submit',methods = ['POST','GET'])
@@ -68,3 +63,9 @@ def submit():
 if __name__ == '__main__':
     app.run(debug=True)
 
+# Jinja is a web template engine for the Python programming language
+# '''
+# {%...%} for statements
+# {{...}} for expressions
+# {#...#} for comments
+# '''

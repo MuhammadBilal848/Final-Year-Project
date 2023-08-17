@@ -5,17 +5,72 @@
 </head>
 <body>
     <h1>Interview Questions</h1>
-    <ul>
+    <div id="question-container">
+        <p id="question-text"></p>
+        <input type="text" id="user-answer">
+        <button id="next-button">Next Question</button>
+    </div>
+
+    <script>
+        const questions = [
         {% for q in question_list %}
-            <li>{{ q }}</li>
-            <form action="/submit" method="post">
-                <label for="answer">Your answer:</label>
-                <input type="text" answer="answer" required><br><br>
-            
-            <input type="submit" value="Submit">
-            </form>
-            
+            "{{ q }}",
         {% endfor %}
-    </ul>
+    ];
+    
+    const questionText = document.getElementById("question-text");
+    const userAnswerInput = document.getElementById("user-answer");
+    const nextButton = document.getElementById("next-button");
+    
+    let currentQuestionIndex = 0;
+    let nextButtonListener = null; // Store the reference to the event listener
+    
+    async function sendAnswerToServer(question, userAnswer) {
+        const response = await fetch('/submit_answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ question, userAnswer }),
+        });
+    
+        if (response.status === 204) {
+            console.log('Answer submitted successfully');
+        } else {
+            console.error('Error submitting answer');
+        }
+    }
+    
+    function showNextQuestion() {
+        if (currentQuestionIndex < questions.length) {
+            questionText.textContent = questions[currentQuestionIndex];
+            userAnswerInput.value = ""; // Clear user's previous answer
+            currentQuestionIndex++;
+    
+            // Remove the previous event listener
+            if (nextButtonListener) {
+                nextButton.removeEventListener("click", nextButtonListener);
+            }
+    
+            // Attach the "Next Question" button click event listener
+            nextButtonListener = () => {
+                const userAnswer = userAnswerInput.value;
+                const question = questions[currentQuestionIndex - 1];
+                sendAnswerToServer(question, userAnswer);
+                showNextQuestion(); // Show the next question after submitting answer
+            };
+    
+            nextButton.addEventListener("click", nextButtonListener);
+        } else {
+            questionText.textContent = "Interview finished.";
+            userAnswerInput.style.display = "none";
+            nextButton.style.display = "none";
+        }
+    }
+    
+    // Start the interview
+    showNextQuestion();
+    </script>
+    
 </body>
 </html>

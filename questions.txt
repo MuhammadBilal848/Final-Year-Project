@@ -1,5 +1,8 @@
 
 
-1. How does Node.js handle asynchronous requests and what are the potential pitfalls when working with asynchronous requests?
+1. How can you incorporate a database into a Flask application using an ORM?
+2. How would you implement authentication and authorization in a Flask application?
 
-2. How would you approach debugging a complex Node.js application that is experiencing performance issues?
+1) How do you design and implement a complex neural network architecture using Tensorflow?
+
+2) What strategies can you suggest to optimize the performance of a Tensorflow model?
