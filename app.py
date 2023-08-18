@@ -66,8 +66,11 @@ def submit():
             "prior_experience": prior_experience,
             "skill & experience": skills
         }
+        print('BEOFRE JSON',response_data)
+        response_data = json.dumps(response_data)
+        print('AFTER JSON',response_data)
 
-    return return jsonify(response_data)
+    return jsonify(response_data)
 
 
 
