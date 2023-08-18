@@ -4,23 +4,11 @@ from questions import gpt_qs
 from response_read import generated_qs , speak_qs , get_answer , clear_text_file
 import time
 
-
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('index.html')
-
-@app.route('/questions/<output>')
-def questions(output):
-    output = eval(output)
-    s_e = output['skill & experience']
-    for i in s_e:
-        skill , experience = i.split(',')
-        gpt_qs(skill,experience)
-    return redirect(url_for('interview'))
-
-
 
 @app.route('/interview/',methods = ['POST','GET'])
 def interview():
@@ -38,10 +26,10 @@ def submit_answer():
         print('Answer ---------------->', user_answer)
         
         # Process the data as needed
-        response = get_answer(question,user_answer)
-        print('first question')
-        print(response)
-        print('first response')
+        # response = get_answer(question,user_answer)
+        # print('first question')
+        # print(response)
+        # print('first response')
         response_data = {"message": "Answer received successfully"}
         return jsonify(response_data)  # Return a JSON response
     else:
@@ -67,9 +55,17 @@ def submit():
             "skill & experience": skills
         }
         print('BEOFRE JSON',response_data)
+
         response_data = json.dumps(response_data)
+
         print('AFTER JSON',response_data)
 
+        ot = eval(response_data)
+
+        s_e = ot['skill & experience']
+        for i in s_e:
+            skill , experience = i.split(',')
+            gpt_qs(skill,experience)
     return jsonify(response_data)
 
 
