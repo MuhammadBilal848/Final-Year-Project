@@ -1,5 +1,0 @@
-
-
-1. How can we enable an application running in a Docker container to access services running in another container without exposing them to the public Internet?
-
-2. How can you securely store sensitive information such as passwords or encryption keys within a Docker container without compromising their security?
