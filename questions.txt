@@ -1,7 +1,5 @@
 
 
-1. How can you detect and handle errors in asynchronous programming in JavaScript?
-2. What is the best way to optimize the performance of a JavaScript application?
+1. What challenges have you faced in working with asynchronous programming in JavaScript?
 
-1. How are state and props used to manage data in React?
-2. How would you architect a React application with complex data dependencies?
+2. How would you structure and architect a complex JavaScript application?
