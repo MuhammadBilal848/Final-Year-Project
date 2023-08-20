@@ -1,27 +1,7 @@
 
 
-1. How can an experienced Anaconda user optimize the data loading process for large datasets?
-2. What strategies can an experienced Anaconda user use to debug and troubleshoot errors in Anaconda code??
+1. How can you detect and handle errors in asynchronous programming in JavaScript?
+2. What is the best way to optimize the performance of a JavaScript application?
 
-1. Describe the differences between optimized and non-optimized code in Python?
-2. Explain how to use decorators to modify functions in Python?
-
-1. How can a person with 6 years of experience use Anaconda to develop efficient workflows for data science tasks?
-
-2. How can a person with 6 years of experience use Anaconda to build and deploy machine learning models at scale?
-
-1. How can you use the built-in data structures in Python to create a more efficient algorithm for solving a complex problem?
-2. How can you write a function in Python that takes a variable number of arguments and returns a single result?
-
-1. How can you use Anaconda to debug and troubleshoot data science code and models?
-2. How can you use Anaconda to automate the deployment of production-ready data science models?
-
-1. Explain the concept of closures in Python and how they are used?
-2. How do you define a class in Python and how is it different from creating an instance of a class?
-
-1. How do you optimize the performance of data science tasks on the Anaconda platform?
-
-2. What strategies should be used to ensure the security of data and applications hosted on an Anaconda platform?
-
-1. What is the difference between a generator and a list comprehension in Python?
-2. How would you design a system to detect and address potential memory leaks in a Python application?
+1. How are state and props used to manage data in React?
+2. How would you architect a React application with complex data dependencies?

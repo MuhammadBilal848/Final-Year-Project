@@ -3,8 +3,10 @@ import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , get_answer , clear_text_file
 import time
+from flask_cors import CORS  # Import the CORS class
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -12,19 +14,24 @@ def home():
     print(' -------------------------------->>>>>>>>>>>> inside home')
     return render_template('index.html')
 
+@app.route('/api/reset',methods=['GET'])
+def reset():
+    return "Reset Successfull", 200
+
 # API ROUTE FOR SUBMITTING DETAILS
 @app.route('/api/submit-details', methods=['POST', 'GET'])
 def submitDetails():
     if request.method == 'POST':
         try:
+            clear_text_file('questions.txt')
             data = request.get_json()  # Parse JSON data from request body
             
             name = data['name']
-            father_name = data['fatherName']
+            father_name = data['father_name']
             age = int(data['age'])
             university = data['university']
-            prior_experience = int(data['priorExperience'])
-            skills = data.get('skill[]', [])  # Use a default empty list if 'skill' is missing
+            prior_experience = int(data['prior_experience'])
+            skills = data.get('skill_and_experience', [])  # Use a default empty list if 'skill' is missing
 
             response_data = {
                 "name": name,
@@ -32,14 +39,14 @@ def submitDetails():
                 "age": age,
                 "university": university,
                 "prior_experience": prior_experience,
-                "skill & experience": skills
+                "skill_and_experience": skills
             }
 
             final_dic = {
                 'user_details': response_data
             }
 
-            s_e = response_data['skill & experience']
+            s_e = response_data['skill_and_experience']
             for i in s_e:
                 skill, experience = i.split(',')
                 gpt_qs(skill, experience)
@@ -47,7 +54,6 @@ def submitDetails():
             question_list = generated_qs()
 
             final_dic['questions'] = question_list
-
             return jsonify(final_dic)
         except Exception as e:
             return jsonify(error=str(e)), 400
@@ -156,7 +162,7 @@ def evaluateAnswers():
             answer = question_data.get('answer')
             
             if question and answer:
-                evaluation_responses.append(get_answer(question, answer))
+                evaluation_responses.append(get_answer(question, answer).replace('\n', ''))
             else:
                 evaluation_responses.append({'error': 'Missing question or answer'})
         

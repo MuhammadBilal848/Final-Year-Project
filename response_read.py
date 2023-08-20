@@ -44,7 +44,7 @@ def get_answer(content,answer):
 
     first_ans = PromptTemplate(
         input_variables = ['qs','ans'] ,
-        template='Given the question "\{qs}"\, how accurate do you believe this answer "\{ans}"\ is on a percentage scale?')
+        template='Given the question "\{qs}"\, how accurate do you believe this answer "\{ans}"\ is on a percentage scale, make sure to only return percentage and nothing else?')
 
     correct_per = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
     response = correct_per.run(qs=content , ans = answer)
