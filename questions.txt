@@ -1,8 +1,9 @@
 
 
-1. What is the difference between the iter() and next() functions in Python?
-2. How can you use try/except blocks to handle exceptions in Python?
+1. How can you leverage the Anaconda Platform to create complex machine learning models in a distributed environment?
 
-1. How can you use PowerBI to create visualizations for complex datasets with multiple columns and rows?
+2. What techniques can be used to optimize the performance of Anaconda applications for large datasets?
 
-2. How can you effectively use PowerBI to create dashboards that provide clear insights and actionable recommendations to stakeholders?
+1. What strategies would you use to ensure your Flask application is performing optimally under high load?
+2. How would you structure your Flask application to minimize database queries and optimize data fetching?
+

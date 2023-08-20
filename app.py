@@ -1,21 +1,20 @@
 from flask import Flask , redirect , url_for , render_template,request,jsonify
 import json
 from questions import gpt_qs
-from response_read import generated_qs , speak_qs , get_answer , clear_text_file
+from response_read import generated_qs , speak_qs , get_answer , clear_text_file , sophisticated_response
 import time
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    print(' -------------------------------->>>>>>>>>>>> inside home')
     return render_template('index.html')
 
 
 @app.route('/submit',methods = ['POST','GET'])
 def submit():
-    print('-------------------------------->>>>>>>>>>>> INSITE SUBMIT')
     if request.method == 'POST':
         name = request.form['name']
         father_name = request.form['fatherName']
@@ -49,7 +48,6 @@ def submit():
 
 @app.route('/interview/')
 def interview():
-    print(' -------------------------------->>>>>>>>>>>> inside interview')
     question_list = generated_qs()
 
     return render_template('interview.html', question_list=question_list)
@@ -58,7 +56,6 @@ list_of_questions = []
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
     q_a = {}
-    print(' -------------------------------->>>>>>>>>>>> inside submit_answer')
     if request.method == 'POST':
         data = request.json
         question = data.get('question')
@@ -74,18 +71,19 @@ def submit_answer():
 
 @app.route('/all_qs_ans', methods=['GET'])
 def all_qs_ans():
-    print(list_of_questions)
-    print(' -------------------------------->>>>>>>>>>>> INSIDE ALL QS ANS')
     return jsonify(list_of_questions)
 
 @app.route('/evaluate', methods=['GET'])
 def evaluate():
     evaluation_responses = []
-    print(' -------------------------------->>>>>>>>>>>> INSIDE EVALUTE')
     dic = list_of_questions
     for i in dic:
         evaluation_responses.append(get_answer(i['question'],i['answer']).replace('\n', ''))
-    return jsonify(evaluation_responses)
+
+    sop_res = sophisticated_response(evaluation_responses)
+
+    return jsonify(sop_res)
+
 
 
 if __name__ == '__main__':
