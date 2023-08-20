@@ -84,7 +84,7 @@ def evaluate():
     print(' -------------------------------->>>>>>>>>>>> INSIDE EVALUTE')
     dic = list_of_questions
     for i in dic:
-        evaluation_responses.append(get_answer(i['question'],i['answer']))
+        evaluation_responses.append(get_answer(i['question'],i['answer']).replace('\n', ''))
     return jsonify(evaluation_responses)
 
 
