@@ -1,1 +1,2 @@
 - Need to add cross questioning.
+- Need to add user's answers to the model retraining, if the answer is correct.
