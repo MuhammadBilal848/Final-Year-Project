@@ -1,1 +1,3 @@
-a
+- add a question checking mechanism using similarity based answer
+- Cross question generation bases on thresold of correctness of answer.
+- Add name to prompt to ask questions by name.
