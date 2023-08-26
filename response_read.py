@@ -40,10 +40,10 @@ def speak_qs(content):
     tts.runAndWait()
 
 
-def get_answer(content,answer):
+def correct_or_not(content,answer):
     ''' Accepts question and answer as parameters and returns whether answer is correct or not wrt to the question '''
     llm = OpenAI(temperature=0.8)
-
+ 
     first_ans = PromptTemplate(
         input_variables = ['qs','ans'] ,
         template='Given the question "\{qs}"\, how accurate do you believe this answer "\{ans}"\ is on a percentage scale, make sure to only return percentage and nothing else?')
@@ -51,6 +51,18 @@ def get_answer(content,answer):
     correct_per = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
     response = correct_per.run(qs=content , ans = answer)
     return response
+
+ 
+def get_answer_from_gpt(question):
+    
+    llm = OpenAI(temperature=0.8)
+
+    gpt_ans = PromptTemplate(
+        input_variables = ['qos'] ,
+        template='Given the question "\{qos}"\ what do you think the answer should be? Summarize the answer in one paragraph')
+    ans2 = LLMChain(llm=llm , prompt=gpt_ans,verbose=True) 
+    response2 = ans2.run(qos=question)
+    return response2
 
 
 def clear_text_file(file_path):
@@ -102,3 +114,6 @@ def sophisticated_response(res_list):
     sop_res_dic['evaluation'] = round(number,2)
     sop_res_dic['evaluation_message'] = f_resp.replace('\n', '')
     return sop_res_dic
+
+
+# print(get_answer_from_gpt('How can you best utilize the EventEmitter class to create a custom event-driven application in Node.js?'))
