@@ -59,48 +59,80 @@ def submitDetails():
     else:
         return "This route only accepts POST requests."
 
+#old submit function
+# @app.route('/submit',methods = ['POST','GET'])
+# def submit():
+#     if request.method == 'POST':
+#         try:
+#             data = request.get_json()  # Parse JSON data from request body
+            
+#             name = data['name']
+#             father_name = data['fatherName']
+#             age = int(data['age'])
+#             university = data['university']
+#             prior_experience = int(data['priorExperience'])
+#             skills = data.get('skill[]', [])  # Use a default empty list if 'skill' is missing
 
+#             response_data = {
+#                 "name": name,
+#                 "father_name": father_name,
+#                 "age": age,
+#                 "university": university,
+#                 "prior_experience": prior_experience,
+#                 "skill & experience": skills
+#             }
+
+#             final_dic = {
+#                 'user_details': response_data
+#             }
+
+#             s_e = response_data['skill & experience']
+#             for i in s_e:
+#                 skill, experience = i.split(',')
+#                 gpt_qs(skill, experience)
+
+#             question_list = generated_qs()
+
+#             final_dic['questions'] = question_list
+
+#             return jsonify(final_dic)
+#         except Exception as e:
+#             return jsonify(error=str(e)), 400
+#     else:
+#         return "This route only accepts POST requests."
+
+# new submit route
 @app.route('/submit',methods = ['POST','GET'])
 def submit():
     if request.method == 'POST':
-        try:
-            data = request.get_json()  # Parse JSON data from request body
-            
-            name = data['name']
-            father_name = data['fatherName']
-            age = int(data['age'])
-            university = data['university']
-            prior_experience = int(data['priorExperience'])
-            skills = data.get('skill[]', [])  # Use a default empty list if 'skill' is missing
+        name = request.form['name']
+        father_name = request.form['fatherName']
+        age = int(request.form['age'])
+        university = request.form['university']
+        prior_experience = int(request.form['priorExperience'])
+        skills = request.form.getlist('skill[]')
 
-            response_data = {
-                "name": name,
-                "father_name": father_name,
-                "age": age,
-                "university": university,
-                "prior_experience": prior_experience,
-                "skill & experience": skills
-            }
+        response_data = {
+            "name": name,
+            "father_name": father_name,
+            "age": age,
+            "university": university,
+            "prior_experience": prior_experience,
+            "skill & experience": skills    }
 
-            final_dic = {
-                'user_details': response_data
-            }
+        final_dic = {
+            'user_details':response_data
+        }
+        s_e = response_data['skill & experience']
+        for i in s_e:
+            skill , experience = i.split(',')
+            gpt_qs(skill,experience)
 
-            s_e = response_data['skill & experience']
-            for i in s_e:
-                skill, experience = i.split(',')
-                gpt_qs(skill, experience)
-
-            question_list = generated_qs()
-
-            final_dic['questions'] = question_list
-
-            return jsonify(final_dic)
-        except Exception as e:
-            return jsonify(error=str(e)), 400
-    else:
-        return "This route only accepts POST requests."
-
+        question_list = generated_qs()
+        
+        final_dic['questions'] = question_list
+        
+    return jsonify(final_dic)
 
 # View Route
 @app.route('/interview/')
@@ -141,7 +173,7 @@ def evaluate():
         evaluation_responses.append(get_answer(i['question'],i['answer']))
     return jsonify(evaluation_responses)
 
-#Evaluation API ROUTE
+# Evaluation API ROUTE
 @app.route('/api/evaluate-answers', methods=['POST'])
 def evaluateAnswers():
     try:
@@ -166,6 +198,8 @@ def evaluateAnswers():
         return jsonify(sop_res)
     except Exception as e:
         return jsonify(error=str(e)), 500
+
+
 
 
 if __name__ == '__main__':
