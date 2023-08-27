@@ -1,2 +1,4 @@
-1. How would you explain the differences between components created with React.js and those created with other JavaScript frameworks?
-2. What strategies would you use to optimize the performance and scalability of an application built with React.js?
+
+
+1. How would you create a RESTful API using Flask and Flask-RESTful?
+2. What strategies would you use to optimize a Flask application to improve response time performance?
