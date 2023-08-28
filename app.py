@@ -2,6 +2,7 @@ from flask import Flask , redirect , url_for , render_template,request,jsonify
 import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , correct_or_not , clear_text_file , sophisticated_response , get_answer_from_gpt
+from qdrant.qdrant_module import upload_embd_get_similarity
 import time
 import random
 
@@ -88,9 +89,16 @@ def finaljson():
     return jsonify(list_of_dic_Qs_gptAns)
 
 
-# @app.route('/compare',methods = ['GET'])
-# def compare():
-
+similarity_result = []
+@app.route("/compare", methods=["GET"])
+def compare():
+    for a in range(len(list_of_dic_Qs_gptAns)):
+        similarity = {}
+        # print(list_of_dic_Qs_userAns[a]['user_answer'])
+        # print(list_of_dic_Qs_gptAns[a]['gpt_answer'])
+        similarity[f'Answer {a}']  = upload_embd_get_similarity(list_of_dic_Qs_userAns[a]['user_answer'],list_of_dic_Qs_gptAns[a]['gpt_answer'])
+        similarity_result.append(similarity)
+    return jsonify(similarity_result)
 
 
 
@@ -100,9 +108,7 @@ def evaluate():
     dic = list_of_dic_Qs_userAns
     for i in dic:
         evaluation_responses.append(correct_or_not(i['question'],i['user_answer']).replace('\n', ''))
-
     sop_res = sophisticated_response(evaluation_responses)
-
     return jsonify(sop_res)
 
 
