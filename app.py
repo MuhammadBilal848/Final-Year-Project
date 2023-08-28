@@ -77,7 +77,31 @@ def all_qs_ans():
     return jsonify(list_of_dic_Qs_userAns)
  
 
+# list_of_dic_Qs_gptAns = []
+# @app.route('/finaljson', methods=['GET'])
+# def finaljson():
+#     dic = generated_qs()
+#     for i in dic:
+#         new_a = {}
+#         new_a['question'] = i
+#         new_a['gpt_answer'] = get_answer_from_gpt(i).replace('\n', '')
+#         list_of_dic_Qs_gptAns.append(new_a) 
+#     return jsonify(list_of_dic_Qs_gptAns)
+
+
+# similarity_result = []
+# @app.route("/compare", methods=["GET"])
+# def compare():
+#     for a in range(len(list_of_dic_Qs_gptAns)):
+#         similarity = {}
+#         similarity[f'Answer {a}']  = upload_embd_get_similarity(list_of_dic_Qs_userAns[a]['user_answer'],list_of_dic_Qs_gptAns[a]['gpt_answer'])
+#         similarity_result.append(similarity)
+#     return jsonify(similarity_result)
+
+
+
 list_of_dic_Qs_gptAns = []
+similarity_result = []
 @app.route('/finaljson', methods=['GET'])
 def finaljson():
     dic = generated_qs()
@@ -86,21 +110,11 @@ def finaljson():
         new_a['question'] = i
         new_a['gpt_answer'] = get_answer_from_gpt(i).replace('\n', '')
         list_of_dic_Qs_gptAns.append(new_a) 
-    return jsonify(list_of_dic_Qs_gptAns)
-
-
-similarity_result = []
-@app.route("/compare", methods=["GET"])
-def compare():
     for a in range(len(list_of_dic_Qs_gptAns)):
         similarity = {}
-        # print(list_of_dic_Qs_userAns[a]['user_answer'])
-        # print(list_of_dic_Qs_gptAns[a]['gpt_answer'])
         similarity[f'Answer {a}']  = upload_embd_get_similarity(list_of_dic_Qs_userAns[a]['user_answer'],list_of_dic_Qs_gptAns[a]['gpt_answer'])
         similarity_result.append(similarity)
     return jsonify(similarity_result)
-
-
 
 @app.route('/evaluate', methods=['GET'])
 def evaluate():
