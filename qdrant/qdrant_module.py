@@ -9,7 +9,7 @@ qdrant = QdrantClient(":memory:")
 
 encoder = SentenceTransformer('all-MiniLM-L6-v2') 
 
-def upload_embd_get_similarity(user_ans,gpt_ans):
+def upload_embd_get_similarity(user_ans: str, gpt_ans: str) -> float:
     qdrant.recreate_collection(
 	collection_name="m",
 	vectors_config=models.VectorParams(
@@ -22,7 +22,7 @@ def upload_embd_get_similarity(user_ans,gpt_ans):
 		models.Record(
 			id=1,
 			vector=encoder.encode(user_ans).tolist(),
-			payload={'text':user_ans})])
+			payload={'text':id})])
 
     hits = qdrant.search(
 	collection_name="m",
@@ -31,6 +31,3 @@ def upload_embd_get_similarity(user_ans,gpt_ans):
 
     for hit in hits:
         return hit.score
-
-
-print('ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')

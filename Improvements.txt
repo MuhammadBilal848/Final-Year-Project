@@ -4,6 +4,8 @@
 - Multiple prompt templates.
 
 
+POTENTIAL ERROR THAT CAN BREAK THE CODE:
+'you'd' can be resolved using "'''"
 
 Fields:
 

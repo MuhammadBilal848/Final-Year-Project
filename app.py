@@ -3,11 +3,11 @@ import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , correct_or_not , clear_text_file , sophisticated_response , get_answer_from_gpt
 import time
-
+import random
 
 app = Flask(__name__)
 
-
+  
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -35,6 +35,7 @@ def submit():
             'user_details':response_data
         }
         s_e = response_data['skill & experience']
+        random.shuffle(s_e)
         for i in s_e:
             skill , experience = i.split(',')
             gpt_qs(skill,experience)
@@ -52,10 +53,10 @@ def interview():
 
     return render_template('interview.html', question_list=question_list)
 
+
 list_of_dic_Qs_userAns = []
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
-    global q_a
     q_a = {}
     if request.method == 'POST':
         data = request.json
@@ -73,37 +74,36 @@ def submit_answer():
 @app.route('/all_qs_ans', methods=['GET'])
 def all_qs_ans():
     return jsonify(list_of_dic_Qs_userAns)
-
+ 
 
 list_of_dic_Qs_gptAns = []
-@app.route('/reevaluate', methods=['GET'])
-def evaluate():
-    # evaluation_responses = []
-    new_a = {}
-    dic = list_of_dic_Qs_userAns
-    print('-------------------------->',dic)
+@app.route('/finaljson', methods=['GET'])
+def finaljson():
+    dic = generated_qs()
     for i in dic:
-        new_a['gpt_answer'] = get_answer_from_gpt(i['question'])
-        list_of_dic_Qs_gptAns.append(new_a)
+        new_a = {}
+        new_a['question'] = i
+        new_a['gpt_answer'] = get_answer_from_gpt(i).replace('\n', '')
+        list_of_dic_Qs_gptAns.append(new_a) 
     return jsonify(list_of_dic_Qs_gptAns)
 
 
+# @app.route('/compare',methods = ['GET'])
+# def compare():
 
 
 
 
+@app.route('/evaluate', methods=['GET'])
+def evaluate():
+    evaluation_responses = []
+    dic = list_of_dic_Qs_userAns
+    for i in dic:
+        evaluation_responses.append(correct_or_not(i['question'],i['user_answer']).replace('\n', ''))
 
+    sop_res = sophisticated_response(evaluation_responses)
 
-# @app.route('/evaluate', methods=['GET'])
-# def evaluate():
-#     evaluation_responses = []
-#     dic = list_of_Qs_userAns_gptAns
-#     for i in dic:
-#         evaluation_responses.append(correct_or_not(i['question'],i['user_answer']).replace('\n', ''))
-
-#     sop_res = sophisticated_response(evaluation_responses)
-
-#     return jsonify(sop_res)
+    return jsonify(sop_res)
 
 
 

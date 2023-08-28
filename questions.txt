@@ -1,4 +1,12 @@
 
 
-1. How would you create a RESTful API using Flask and Flask-RESTful?
-2. What strategies would you use to optimize a Flask application to improve response time performance?
+1. How would you create a Flask application that can scale to a large number of concurrent requests?
+2. What strategies would you use to secure a Flask application against cross-site scripting and SQL injection vulnerabilities?
+
+1. How would you implement a Node.js API endpoint for a complex database query that involves multiple joins and subqueries?
+
+2. How would you design a Node.js module that can be used to authenticate users on multiple platforms with varying authentication protocols?
+
+1. Describe how higher-order components work and how they are used to improve React performance.
+
+2. Explain how React's context API can be used to share data between components without the need for props drilling.

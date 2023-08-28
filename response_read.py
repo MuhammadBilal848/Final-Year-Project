@@ -94,7 +94,6 @@ def calculate_overall_performance(accuracy_scores):
     return overall_performance
 
 
-
 def final_evaluation(total_score):
     ''' Accepts total score as parameters and returns a response if score is good enough to pass the interview or not '''
     llm = OpenAI(temperature=0.8)
@@ -107,6 +106,7 @@ def final_evaluation(total_score):
     response_f = per_response.run(tot_acc = total_score)
     return response_f
 
+
 def sophisticated_response(res_list):
     sop_res_dic = {}
     number = calculate_overall_performance(clean_and_convert_percentage_strings(res_list))
@@ -116,4 +116,3 @@ def sophisticated_response(res_list):
     return sop_res_dic
 
 
-# print(get_answer_from_gpt('How can you best utilize the EventEmitter class to create a custom event-driven application in Node.js?'))
