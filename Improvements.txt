@@ -1,3 +1,0 @@
-- Need to add cross questioning.
-- Need to add user's answers to the model retraining, if the answer is correct.
-- We can generate questions and answer(O) to those question at the same time, and then get user's answers(F) , and then later we can check the similarity btw O and F.

@@ -1,4 +1,0 @@
-
-
-1. How significant is the impact of asynchronous events in Node.js for performance optimization?
-2. How can you best utilize the EventEmitter class to create a custom event-driven application in Node.js?
