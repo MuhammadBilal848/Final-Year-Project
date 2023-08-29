@@ -1,0 +1,8 @@
+
+
+1. How does TensorFlow enable model debugging and performance optimization?
+2. How does TensorFlow deal with missing or skewed data while training a deep learning model?
+
+1. How would you use Power BI to develop machine learning models to identify business trends and opportunities?
+
+2. How would you apply data analysis techniques such as clustering and predictive analytics to gain insights from Power BI data?

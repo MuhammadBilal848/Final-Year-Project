@@ -54,7 +54,7 @@ def correct_or_not(content,answer):
 
  
 def get_answer_from_gpt(question):
-    
+    '''  Takes a question and returns answer from chatmodel '''
     llm = OpenAI(temperature=0.8)
 
     gpt_ans = PromptTemplate(
@@ -111,7 +111,7 @@ def sophisticated_response(res_list):
     sop_res_dic = {}
     number = calculate_overall_performance(clean_and_convert_percentage_strings(res_list))
     f_resp = final_evaluation(number)
-    sop_res_dic['evaluation'] = round(number,2)
+    sop_res_dic['evaluation'] = number # round(number,2)
     sop_res_dic['evaluation_message'] = f_resp.replace('\n', '')
     return sop_res_dic
 

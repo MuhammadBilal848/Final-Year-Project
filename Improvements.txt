@@ -1,0 +1,36 @@
+- add a question checking mechanism using similarity based answer (DONE)
+- Cross question generation bases on thresold of correctness of answer.
+- Add name to prompt to ask questions by name.
+- Multiple prompt templates.
+
+
+POTENTIAL ERROR THAT CAN BREAK THE CODE:
+'you'd' can be resolved using "'''"
+
+Fields:
+
+Personal Information:
+Name
+Email address
+Phone number
+Location
+
+Position or Role:
+Desired job title or role
+
+Education:
+Highest level of education completed
+Major/Field of study
+Name of institution
+
+Work Experience:
+Previous job titles
+Company names
+Duration of employment
+Job responsibilities
+
+Skills and Qualifications:
+Technical skills (programming languages, software, tools)
+Soft skills (communication, teamwork, leadership)
+
+Previous Pojects
