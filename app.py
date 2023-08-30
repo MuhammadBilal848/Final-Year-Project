@@ -8,7 +8,6 @@ import time
 import random
 
 
-
 app = Flask(__name__)
 CORS(app)
   
