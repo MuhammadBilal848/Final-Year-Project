@@ -85,13 +85,14 @@ def clean_and_convert_percentage_strings(percentage_strings):
 
 
 def calculate_overall_performance(accuracy_scores):
-    ''' Takes a list of integers and returns the total score '''
+    ''' Takes a list of floats and returns the total score '''
     total_weight = len(accuracy_scores) * 10  # Each question has a weight of 10
     
     weighted_sum = sum(accuracy * 10 for accuracy in accuracy_scores)
     
     overall_performance = weighted_sum / (total_weight+1)
     return overall_performance
+
 
 
 def final_evaluation(total_score):
@@ -109,9 +110,9 @@ def final_evaluation(total_score):
 
 def sophisticated_response(res_list):
     sop_res_dic = {}
-    number = calculate_overall_performance(clean_and_convert_percentage_strings(res_list))
+    number = calculate_overall_performance(res_list)
     f_resp = final_evaluation(number)
-    sop_res_dic['evaluation'] = number # round(number,2)
+    sop_res_dic['evaluation'] = round(number,2)
     sop_res_dic['evaluation_message'] = f_resp.replace('\n', '')
     return sop_res_dic
 

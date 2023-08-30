@@ -15,7 +15,6 @@ def submitDetails():
         try:
             clear_text_file('questions.txt')
             data = request.get_json()  # Parse JSON data from request body
-            print('PRINTINT JSON DATA ==========================>',data)
             name = data['name']
             father_name = data['father_name']
             age = int(data['age'])
@@ -47,7 +46,6 @@ def submitDetails():
 def evaluateAnswers():
     try:
         data = request.get_json()  # Parse JSON data from request body
-        print('PRINTINT JSON DATA ==========================>',data)
 
         if not isinstance(data, list):
             return jsonify(error="Invalid JSON data, expected a list"), 400
@@ -186,3 +184,4 @@ if __name__ == '__main__':
 #         similarity[f'Answer {a}']  = upload_embd_get_similarity(list_of_dic_Qs_userAns[a]['user_answer'],list_of_dic_Qs_gptAns[a]['gpt_answer'])
 #         similarity_result.append(similarity)
 #     return jsonify(similarity_result)
+s
