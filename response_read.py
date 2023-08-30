@@ -97,6 +97,7 @@ def calculate_overall_performance(accuracy_scores):
 
 def final_evaluation(total_score):
     ''' Accepts total score as parameters and returns a response if score is good enough to pass the interview or not '''
+
     llm = OpenAI(temperature=0.8)
 
     first_ans = PromptTemplate(
@@ -104,7 +105,7 @@ def final_evaluation(total_score):
         template = 'We took an interview from a person, and asked some questions, the person score {tot_acc} out of 100 as an average score, write me a brief summary for the interview.')
         
     per_response = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
-    response_f = per_response.run(tot_acc = total_score)
+    response_f = per_response.run(tot_acc = round(total_score,2))
     return response_f
 
 
