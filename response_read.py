@@ -8,18 +8,6 @@ from constant import openai_key
 os.environ['OPENAI_API_KEY'] = openai_key
 
 
-# def initialize_voice_prompt_templtate():
-#     ''' Initializes llm temperature , prompt template and llm chain '''
-#     global llm , first_ans , correct_per
-#     llm = OpenAI(temperature=0.8)
-
-#     first_ans = PromptTemplate(
-#         input_variables = ['qs','ans'] ,
-#         template='Given the question "\{qs}"\, how accurate do you believe this answer "\{ans}"\ is on a percentage scale?')
-
-#     correct_per = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
-
-
 def generated_qs():
     ''' Returns already written questions in form of a python list '''
     global cleaned_contents
