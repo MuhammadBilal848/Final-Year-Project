@@ -11,6 +11,12 @@ import random
 app = Flask(__name__)
 CORS(app)
   
+
+@app.route('/api/reset',methods=['GET'])
+def reset():
+    return "Reset Successfull", 200
+
+
 @app.route('/api/submit-details', methods=['POST', 'GET'])
 def submitDetails():
     if request.method == 'POST':
