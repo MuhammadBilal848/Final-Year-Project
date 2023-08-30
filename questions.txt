@@ -1,5 +1,5 @@
 
 
-1. How can we use machine learning algorithms to improve the accuracy of a computer vision model?
+1. How can a computer recognize various objects in an image using deep learning algorithms?
 
-2. What are some methods of overcoming the challenge of data annotation for large-scale computer vision projects?
+2. What techniques can be used to accurately measure the size of objects in an image?

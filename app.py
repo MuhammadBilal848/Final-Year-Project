@@ -3,12 +3,14 @@ import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , correct_or_not , clear_text_file , sophisticated_response , get_answer_from_gpt
 from qdrant.qdrant_module import upload_embd_get_similarity
+from flask_cors import CORS  # Import the CORS class
 import time
 import random
 
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+CORS(app)
   
 @app.route('/api/submit-details', methods=['POST', 'GET'])
 def submitDetails():
