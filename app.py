@@ -56,7 +56,7 @@ def evaluateAnswers():
 
         for question_data in data:
             question = question_data.get('question')
-            answer = question_data.get('user_answer')
+            answer = question_data.get('answer')
             if question and answer:
                 evaluation_responses.append(upload_embd_get_similarity(answer , get_answer_from_gpt(question).replace('\n', ''))*100)
             else:
