@@ -70,32 +70,16 @@ def clean_and_convert_percentage_strings(percentage_strings):
         integer_value = int(cleaned_string)  
         cleaned_integers.append(integer_value)
     return cleaned_integers
-<<<<<<< HEAD
- 
- 
-def calculate_overall_performance(accuracy_scores):
-    ''' Takes a list of integers and returns the total score '''
-=======
 
 
 def calculate_overall_performance(accuracy_scores):
     ''' Takes a list of floats and returns the total score '''
->>>>>>> 92f4039ebdf2d5d5d24c975579c8887c9e660e06
     total_weight = len(accuracy_scores) * 10  # Each question has a weight of 10
     
     weighted_sum = sum(accuracy * 10 for accuracy in accuracy_scores)
     
     overall_performance = weighted_sum / (total_weight+1)
     return overall_performance
-<<<<<<< HEAD
- 
- 
- 
-def final_evaluation(total_score):
-    ''' Accepts total score as parameters and returns a response if score is good enough to pass the interview or not '''
-    llm = OpenAI(temperature=0.8)
- 
-=======
 
 
 
@@ -104,24 +88,11 @@ def final_evaluation(total_score):
 
     llm = OpenAI(temperature=0.8)
 
->>>>>>> 92f4039ebdf2d5d5d24c975579c8887c9e660e06
     first_ans = PromptTemplate(
         input_variables = ['tot_acc'] ,
         template = 'We took an interview from a person, and asked some questions, the person score {tot_acc} out of 100 as an average score, write me a brief summary for the interview.')
         
     per_response = LLMChain(llm=llm , prompt=first_ans,verbose=True) 
-<<<<<<< HEAD
-    response_f = per_response.run(tot_acc = total_score)
-    return response_f
- 
-def sophisticated_response(res_list):
-    sop_res_dic = {}
-    number = calculate_overall_performance(clean_and_convert_percentage_strings(res_list))
-    f_resp = final_evaluation(round(number,2))
-    sop_res_dic['evaluation'] = round(number,2)
-    sop_res_dic['evaluation_message'] = f_resp.replace('\n', '')
-    return sop_res_dic
-=======
     response_f = per_response.run(tot_acc = round(total_score,2))
     return response_f
 
@@ -135,4 +106,3 @@ def sophisticated_response(res_list):
     return sop_res_dic
 
 
->>>>>>> 92f4039ebdf2d5d5d24c975579c8887c9e660e06
