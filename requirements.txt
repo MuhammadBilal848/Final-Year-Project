@@ -3,4 +3,10 @@ langchain==0.0.216
 streamlit
 flask
 pyttsx3
+<<<<<<< HEAD
 flask_cors
+=======
+qdrant-client>=1.1.1
+sentence-transformers
+torch
+>>>>>>> 92f4039ebdf2d5d5d24c975579c8887c9e660e06

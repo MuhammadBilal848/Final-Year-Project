@@ -1,5 +1,11 @@
 
 
+<<<<<<< HEAD
 1. What challenges have you faced in working with asynchronous programming in JavaScript?
 
 2. How would you structure and architect a complex JavaScript application?
+=======
+1. How can a computer recognize various objects in an image using deep learning algorithms?
+
+2. What techniques can be used to accurately measure the size of objects in an image?
+>>>>>>> 92f4039ebdf2d5d5d24c975579c8887c9e660e06
