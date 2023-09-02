@@ -24,7 +24,7 @@ def submitDetails():
             clear_text_file('questions.txt')
             data = request.get_json()
 
-            required_fields = ['name', 'email', 'phone_number','father_name', 'age', 'university', 'prior_experience', 'skill_and_experience']
+            required_fields = ['name', 'email', 'phone_number','father_name', 'age', 'university', 'position_applied_for','prior_experience', 'skill_and_experience']
             for field in required_fields:
                 if field not in data:
                     return jsonify(error=f"{field} is missing in the payload"), 400
@@ -35,6 +35,7 @@ def submitDetails():
             father_name = data['father_name']
             age = int(data['age'])
             university = data['university']
+            position_applied_for = data['position_applied_for']
             prior_experience = int(data['prior_experience'])
             skills = data['skill_and_experience']
 
@@ -48,6 +49,7 @@ def submitDetails():
                 "father_name": father_name,
                 "age": age,
                 "university": university,
+                "position_applied_for": position_applied_for,
                 "prior_experience": prior_experience,
                 "skill_and_experience": skills
             }
