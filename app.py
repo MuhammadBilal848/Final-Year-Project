@@ -22,27 +22,44 @@ def submitDetails():
     if request.method == 'POST':
         try:
             clear_text_file('questions.txt')
-            data = request.get_json() 
+            data = request.get_json()
+
+            required_fields = ['name', 'email', 'phone_number','father_name', 'age', 'university', 'prior_experience', 'skill_and_experience']
+            for field in required_fields:
+                if field not in data:
+                    return jsonify(error=f"{field} is missing in the payload"), 400
+
             name = data['name']
+            email = data['email']
+            phone_number = data['phone_number']
             father_name = data['father_name']
             age = int(data['age'])
             university = data['university']
             prior_experience = int(data['prior_experience'])
-            skills = data.get('skill_and_experience', []) 
+            skills = data['skill_and_experience']
+
+            if not isinstance(skills, list) or not all(isinstance(skill, dict) and 'skill' in skill and 'experience' in skill for skill in skills):
+                return jsonify(error="Invalid skill_and_experience format. It should be an array of objects with 'skill' and 'experience' keys"), 400
+
             response_data = {
                 "name": name,
+                "email": email,
+                "phone_number": phone_number,
                 "father_name": father_name,
                 "age": age,
                 "university": university,
                 "prior_experience": prior_experience,
-                "skill_and_experience": skills}
+                "skill_and_experience": skills
+            }
+
             final_dic = {'user_details': response_data}
-            s_e = response_data['skill_and_experience']
-            for i in s_e:
-                skill, experience = i.split(',')
-                gpt_qs(skill, experience)
+
+            for skill_experience in skills:
+                gpt_qs(skill_experience['skill'], skill_experience['experience'])
+
             question_list = generated_qs()
             final_dic['questions'] = question_list
+
             return jsonify(final_dic)
         except Exception as e:
             return jsonify(error=str(e)), 400
@@ -61,7 +78,7 @@ def evaluateAnswers():
 
         for question_data in data:
             question = question_data.get('question')
-            answer = question_data.get('answer')
+            answer = question_data.get('user_answer')
             if question and answer:
                 evaluation_responses.append(upload_embd_get_similarity(answer , get_answer_from_gpt(question).replace('\n', ''))*100)
             else:
