@@ -15,5 +15,5 @@ ISSUES FOUND IN FRONTEND
 2. Finish button on evaluation screen should navigate to home page.
 
 
-
-
+UI/UX IMPROVEMENTS
+1. Next button on interview screens should be displayed at bottom right.
