@@ -6,11 +6,88 @@ from qdrant.qdrant_module import upload_embd_get_similarity
 from flask_cors import CORS  # Import the CORS class
 import time
 import random
-
+from db.db import db
+from db.models.user import User
+from peewee import IntegrityError, DataError
+from db.models.evaluation import Evaluation
+import datetime
 
 app = Flask(__name__)
 CORS(app)
-  
+
+app.config.from_pyfile('db/config.py')
+db.connect()
+
+# // Uncomment these lines ---> agar tables nh bni huin (also create database manually in MySQL client that you use)
+# db.create_tables([Evaluation], safe=True)
+# db.create_tables([User], safe=True)
+
+@app.route('/api/users', methods=['POST'])
+def createUser():
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        email = data.get('email')
+
+        if not username or not email:
+            return jsonify({'error': 'Username and email are required'}), 400
+
+        if User.select().where((User.username == username) | (User.email == email)).exists():
+            return jsonify({'error': 'User with the same username or email already exists'}), 409
+
+        user = User.create(username=username, email=email)
+
+        return jsonify({'message': 'User created successfully', 'user_id': user.id}), 201
+
+    except (IntegrityError, DataError) as e:
+        return jsonify({'error': 'Failed to create user. Invalid data or database error.'}), 500
+
+@app.route('/api/users', methods=['GET'])
+def getUsers():
+    users = User.select()
+    user_list = [user.to_dict() for user in users]
+    return jsonify(user_list)
+
+@app.route('/api/get-one/users', methods=['POST'])
+def getUserByEmail():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+
+        if not email:
+            return jsonify({'error': 'Email is required'}), 400
+
+        user = User.select().where(User.email == email).first()
+
+        if user:
+            user_data = {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            }
+            return jsonify(user_data), 200
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    except Exception as e:
+        return jsonify({'error': 'Failed to retrieve user. Internal server error.'}), 500
+
+@app.route('/api/user/evaluations', methods=['GET'])
+def getEvaluationsByUser():
+    try:
+        user_id = int(request.args.get('user_id'))
+
+        if user_id is None:
+            return jsonify(error="Missing 'user_id' in query parameters"), 400
+
+        evaluations = Evaluation.select().where(Evaluation.user_id == user_id).order_by(Evaluation.evaluation_date.desc())  # Optional: Sort by evaluation date in descending order
+
+        evaluation_list = [evaluation.to_dict() for evaluation in evaluations]
+
+        return jsonify(evaluation_list)
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+
 
 @app.route('/api/reset',methods=['GET'])
 def reset():
@@ -78,6 +155,13 @@ def evaluateAnswers():
             return jsonify(error="Invalid JSON data, expected a list"), 400
         evaluation_responses = []
 
+        user_id = request.args.get('user_id')
+
+        if user_id is None:
+            return jsonify(error="Missing 'user_id' in query parameters"), 400
+        
+        evaluation_date = datetime.date.today().strftime('%Y-%m-%d')
+
         for question_data in data:
             question = question_data.get('question')
             answer = question_data.get('user_answer')
@@ -86,6 +170,18 @@ def evaluateAnswers():
             else:
                 evaluation_responses.append({'error': 'Missing question or answer'})
         sop_res = sophisticated_response(evaluation_responses)
+
+        evaluation_id = Evaluation.create(
+            user_id=user_id,
+            evaluation = sop_res['evaluation'],
+            evaluation_message = sop_res['evaluation_message'],
+            evaluation_date= evaluation_date 
+        )
+
+        sop_res['user_id'] = str(user_id)
+        sop_res['evaluation_id'] = str(evaluation_id)
+        sop_res['evaluation_date'] = str(evaluation_date)
+
         return jsonify(sop_res)
     except Exception as e:
         return jsonify(error=str(e)), 500
