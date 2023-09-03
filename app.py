@@ -3,12 +3,12 @@ import json
 from questions import gpt_qs
 from response_read import generated_qs , speak_qs , correct_or_not , clear_text_file , sophisticated_response , get_answer_from_gpt
 from qdrant.qdrant_module import upload_embd_get_similarity
+from flask_cors import CORS  # Import the CORS class
 import time
 import random
 
 app = Flask(__name__)
-
-  
+CORS(app)
 
 @app.route('/api/reset',methods=['GET'])
 def reset():
@@ -20,54 +20,50 @@ def submitDetails():
     if request.method == 'POST':
         try:
             clear_text_file('questions.txt')
-            data = request.get_json() 
+            data = request.get_json()
+
+            required_fields = ['name', 'email', 'phone_number','father_name', 'age', 'university', 'position_applied_for','prior_experience', 'skill_and_experience']
+            for field in required_fields:
+                if field not in data:
+                    return jsonify(error=f"{field} is missing in the payload"), 400
+
             name = data['name']
+            email = data['email']
+            phone_number = data['phone_number']
             father_name = data['father_name']
             age = int(data['age'])
             university = data['university']
+            position_applied_for = data['position_applied_for']
             prior_experience = int(data['prior_experience'])
-            email = data['email']
-            phone_number = data['phone_number']
-            location = data['location']
-            desired_role = data['desired_role']
-            education_level = data['education_level']
-            institution_name = data['institution_name']
-            previous_job_title = data.get('previous_job_title', '')
-            company_name = data.get('company_name', '')
-            employment_duration = data.get('employment_duration', '')
-            job_responsibilities = data.get('job_responsibilities', [])
-            skills = data.get('skill_and_experience', [])
+            skills = data['skill_and_experience']
+
+            if not isinstance(skills, list) or not all(isinstance(skill, dict) and 'skill' in skill and 'experience' in skill for skill in skills):
+                return jsonify(error="Invalid skill_and_experience format. It should be an array of objects with 'skill' and 'experience' keys"), 400
 
             response_data = {
                 "name": name,
+                "email": email,
+                "phone_number": phone_number,
                 "father_name": father_name,
                 "age": age,
                 "university": university,
+                "position_applied_for": position_applied_for,
                 "prior_experience": prior_experience,
-                "email": email,
-                "phone_number": phone_number,
-                "location": location,
-                "desired_role": desired_role,
-                "education_level": education_level,
-                "institution_name": institution_name,
-                "previous_job_title": previous_job_title,
-                "company_name": company_name,
-                "employment_duration": employment_duration,
-                "job_responsibilities": job_responsibilities,
-                "skill_and_experience": skills
-            }
+                "skill_and_experience": skills}
+
             final_dic = {'user_details': response_data}
-            s_e = response_data['skill_and_experience']
-            for i in s_e:
-                skill, experience = i.split(',')
-                gpt_qs(skill, experience)
+
+            gpt_qs(skills,position_applied_for)
+
             question_list = generated_qs()
             final_dic['questions'] = question_list
+
             return jsonify(final_dic)
         except Exception as e:
             return jsonify(error=str(e)), 400
     else:
         return "This route only accepts POST requests."
+
 
 
 @app.route('/api/evaluate-answers', methods=['POST'])
@@ -81,7 +77,7 @@ def evaluateAnswers():
 
         for question_data in data:
             question = question_data.get('question')
-            answer = question_data.get('answer')
+            answer = question_data.get('user_answer')
             if question and answer:
                 evaluation_responses.append(upload_embd_get_similarity(answer , get_answer_from_gpt(question).replace('\n', ''))*100)
             else:

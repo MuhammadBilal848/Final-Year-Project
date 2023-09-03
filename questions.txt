@@ -1,5 +1,0 @@
-
-
-1. How can we use machine learning algorithms to improve the accuracy of a computer vision model?
-
-2. What are some methods of overcoming the challenge of data annotation for large-scale computer vision projects?
