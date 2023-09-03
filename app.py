@@ -48,21 +48,11 @@ def submitDetails():
                 "university": university,
                 "position_applied_for": position_applied_for,
                 "prior_experience": prior_experience,
-<<<<<<< HEAD
-                "skill_and_experience": skills
-            }
-
-            final_dic = {'user_details': response_data}
-
-            for skill_experience in skills:
-                gpt_qs(skill_experience['skill'], skill_experience['experience'])
-=======
                 "skill_and_experience": skills}
 
             final_dic = {'user_details': response_data}
 
             gpt_qs(skills,position_applied_for)
->>>>>>> backend
 
             question_list = generated_qs()
             final_dic['questions'] = question_list
@@ -96,10 +86,6 @@ def evaluateAnswers():
     except Exception as e:
         return jsonify(error=str(e)), 500
 
-<<<<<<< HEAD
-=======
-
->>>>>>> backend
 
 if __name__ == '__main__':
     app.run(debug=True)
