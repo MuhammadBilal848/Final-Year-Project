@@ -1,3 +1,5 @@
+
+FUNTIONALITY IMPROVEMENTS
 1. Add eye movement to the camera so that user can be detected cheating.
 2. Add more fields such as (Email address, Phone Number, Location ,
          Desired job title or role, Highest level of education completed, Name of institution, 
@@ -6,4 +8,12 @@
 4. add a question checking mechanism using similarity based answer (DONE)
 5. Add name to prompt to ask questions by name.
 6. Multiple prompt templates.
+
+
+ISSUES FOUND IN FRONTEND
+1. Two eye icons appearing in password field of login page.
+2. Finish button on evaluation screen should navigate to home page.
+
+
+
 

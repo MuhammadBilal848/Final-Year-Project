@@ -1,5 +1,5 @@
 
 
-1. How can a computer recognize various objects in an image using deep learning algorithms?
+1. How would you develop algorithms to analyze data and identify patterns in large data sets?
 
-2. What techniques can be used to accurately measure the size of objects in an image?
+2. How would you use statistical techniques to measure and evaluate the performance of data models?
