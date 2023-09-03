@@ -103,6 +103,10 @@ def sophisticated_response(res_list):
     f_resp = final_evaluation(number)
     sop_res_dic['evaluation'] = round(number,2)
     sop_res_dic['evaluation_message'] = f_resp.replace('\n', '')
+    if round(number,2) <= 65:
+        sop_res_dic['result'] = 'Fail'
+    else:
+        sop_res_dic['result'] = 'Pass'
     return sop_res_dic
 
 
