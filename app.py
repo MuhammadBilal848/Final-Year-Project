@@ -5,12 +5,9 @@ from response_read import generated_qs , speak_qs , correct_or_not , clear_text_
 from qdrant.qdrant_module import upload_embd_get_similarity
 from flask_cors import CORS  # Import the CORS class
 import time
-import random
-
 
 app = Flask(__name__)
 CORS(app)
-  
 
 @app.route('/api/reset',methods=['GET'])
 def reset():
@@ -51,6 +48,7 @@ def submitDetails():
                 "university": university,
                 "position_applied_for": position_applied_for,
                 "prior_experience": prior_experience,
+<<<<<<< HEAD
                 "skill_and_experience": skills
             }
 
@@ -58,6 +56,13 @@ def submitDetails():
 
             for skill_experience in skills:
                 gpt_qs(skill_experience['skill'], skill_experience['experience'])
+=======
+                "skill_and_experience": skills}
+
+            final_dic = {'user_details': response_data}
+
+            gpt_qs(skills,position_applied_for)
+>>>>>>> backend
 
             question_list = generated_qs()
             final_dic['questions'] = question_list
@@ -67,6 +72,7 @@ def submitDetails():
             return jsonify(error=str(e)), 400
     else:
         return "This route only accepts POST requests."
+
 
 
 @app.route('/api/evaluate-answers', methods=['POST'])
@@ -90,6 +96,10 @@ def evaluateAnswers():
     except Exception as e:
         return jsonify(error=str(e)), 500
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> backend
 
 if __name__ == '__main__':
     app.run(debug=True)
