@@ -1,7 +1,7 @@
 1. Add eye movement to the camera so that user can be detected cheating.
 2. Add more fields such as (Email address, Phone Number, Location ,
          Desired job title or role, Highest level of education completed, Name of institution, 
-                Previous job titles, Company names, Duration of employment, Job responsibilities) 
+                Previous job titles, Company names, Duration of employment, Job responsibilities) DONE
 3. Cross question generation based on thresold of correctness of answer.
 4. add a question checking mechanism using similarity based answer (DONE)
 5. Add name to prompt to ask questions by name.
