@@ -1,5 +1,12 @@
 
 
-1. How can a computer recognize various objects in an image using deep learning algorithms?
-
-2. What techniques can be used to accurately measure the size of objects in an image?
+1. Describe a machine learning algorithm you have used to solve a computer vision task?
+2. What techniques have you employed to optimise performance of a computer vision system?
+3. Explain how have you used Python to access and manipulate image data?
+4. What are the advantages and disadvantages of using Python for computer vision tasks?
+5. Explain the concepts of feature extraction and feature selection in computer vision?
+6. Describe the experience you have gained with deep learning frameworks for computer vision?
+7. Explain how have you developed and evaluated machine learning models using Python?
+8. What libraries and frameworks have you used for implementing machine learning algorithms in Python?
+9. How have you used Python to perform data pre-processing, data visualization and exploratory data analysis?
+10. How have you used open source computer vision libraries such as OpenCV for solving real-world tasks?

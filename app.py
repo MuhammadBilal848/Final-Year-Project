@@ -186,8 +186,9 @@ def submitDetails():
 
             final_dic = {"user_details": response_data}
 
-            for skill_experience in skills:
-                gpt_qs(skill_experience["skill"], skill_experience["experience"])
+
+            gpt_qs(skills,position_applied_for)
+
 
             question_list = generated_qs()
             final_dic["questions"] = question_list
@@ -199,7 +200,7 @@ def submitDetails():
         return "This route only accepts POST requests."
 
 
-@app.route("/api/evaluate-answers", methods=["POST"])
+@app.route('/api/evaluate-answers', methods=['POST'])
 def evaluateAnswers():
     try:
         data = request.get_json()
