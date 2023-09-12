@@ -1,0 +1,10 @@
+from peewee import MySQLDatabase
+from db.config import DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME
+
+db = MySQLDatabase(
+    DATABASE_NAME,
+    user=DATABASE_USERNAME,
+    password=DATABASE_PASSWORD,
+    host=DATABASE_HOST,
+    port=DATABASE_PORT
+)

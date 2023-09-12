@@ -7,3 +7,4 @@ qdrant-client>=1.1.1
 sentence-transformers
 torch
 flask_cors
+peewee
