@@ -43,4 +43,11 @@ conda activate venv/
 8. Install all the necessary packages by using the following command:
 ```bash
 pip install -r requirements.txt
-    
+```
+
+## Authors
+- [@MuhammadBilal848](https://github.com/MuhammadBilal848)
+    - Back End.
+- [@AbuzarThanvi](https://github.com/abuzarthanvi25)
+    - Front End.
+
