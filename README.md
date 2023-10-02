@@ -1,6 +1,12 @@
-# Final Year Project
+# GenView 
 ---
-Contains final year project.
+GenView serves as a Generative AI Interview system designed to assist companies in choosing suitable candidates for their job vacancies.
+
+## Demo
+<p align="center">
+  <img src="https://github.com/MuhammadBilal848/GenView-FYP1/blob/main/working.gif" alt="GenView">
+</p>
+
 
 
 ## Installation
