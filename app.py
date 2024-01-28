@@ -186,9 +186,7 @@ def submitDetails():
 
             final_dic = {"user_details": response_data}
 
-
-            gpt_qs(skills,position_applied_for)
-
+            gpt_qs(skills, position_applied_for)
 
             question_list = generated_qs()
             final_dic["questions"] = question_list
@@ -200,23 +198,27 @@ def submitDetails():
         return "This route only accepts POST requests."
 
 
-@app.route('/api/evaluate-answers', methods=['POST'])
+@app.route("/api/evaluate-answers", methods=["POST"])
 def evaluateAnswers():
     try:
         data = request.get_json()
 
-        if not isinstance(data, list):
-            return jsonify(error="Invalid JSON data, expected a list"), 400
+        print(data)
+
+        # if not isinstance(data, list):
+        #     return jsonify(error="Invalid JSON data, expected a list"), 400
         evaluation_responses = []
 
         user_id = request.args.get("user_id")
+        user_name = data.get("user_name")
+        payload = data.get("data")
 
         if user_id is None:
             return jsonify(error="Missing 'user_id' in query parameters"), 400
 
         evaluation_date = datetime.date.today().strftime("%Y-%m-%d")
 
-        for question_data in data:
+        for question_data in payload:
             question = question_data.get("question")
             answer = question_data.get("user_answer")
             if question and answer:
@@ -235,6 +237,7 @@ def evaluateAnswers():
             evaluation=sop_res["evaluation"],
             evaluation_message=sop_res["evaluation_message"],
             evaluation_date=evaluation_date,
+            user_name=user_name,
         )
 
         sop_res["user_id"] = str(user_id)

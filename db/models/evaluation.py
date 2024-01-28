@@ -8,6 +8,7 @@ class Evaluation(Model):
     evaluation_message = CharField(max_length=255)
     user_id = ForeignKeyField(User, backref="evaluations")
     evaluation_date = DateField()
+    user_name = CharField(max_length=255)
 
     class Meta:
         database = db
@@ -22,4 +23,5 @@ class Evaluation(Model):
             "evaluation_date": self.evaluation_date.strftime(
                 "%Y-%m-%d"
             ),  # Format the date as a string
+            "user_name": self.user_name,
         }
